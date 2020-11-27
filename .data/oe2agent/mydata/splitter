@@ -1,0 +1,24 @@
+#!/bin/bash
+BASEDIR=/opt/oe2agent/mydata
+FNAME=$1
+LINES=`wc -l $FNAME | cut -d" " -f1`
+if [ "$LINES" == "1" ]; then
+	echo "error"
+	exit 1
+fi
+
+while read line; do
+	if [ "$line" == "-end-" ]; then
+		exit 0
+	fi
+	
+	if [ "$line" != "-ignore-" ]; then
+		SEQ=`echo $line | cut -d"," -f2`
+		TYPE=`echo $line | cut -d"," -f3`
+		NAME=`echo $line | cut -d"," -f4`
+		PERM=`echo $line | cut -d"," -f5`
+		SPLITNAME=$SEQ$TYPE$NAME
+		sed -n "/${NAME}_start/,/${NAME}_end/p" $FNAME | tail -n +2 | head -n -1 > $BASEDIR/$SPLITNAME
+		chmod $PERM $BASEDIR/$SPLITNAME
+	fi
+done < $FNAME

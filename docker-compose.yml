@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  nitrogen:
+    image: image: weshinetech/uniapps-exam:2020.12.01
+    restart: always
+    volumes:
+      - ${PWD}/.data/oe2agent:/opt/oe2agent:rw
+    ports:
+      - 80:9000
+
+  couchdb:
+    image: weshinetech/uniapps-exam-couchdb:2020.12.01
+    restart: always
+    volumes:
+      - ${PWD}/.data/couchdb/data:/opt/couchdb/data:rw
