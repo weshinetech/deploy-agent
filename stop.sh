@@ -3,3 +3,4 @@
 #
 # stop docker containers
 #
+docker-compose down
