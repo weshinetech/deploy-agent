@@ -51,6 +51,8 @@ KIOSKDIR=`pwd`/kiosk
 mkdir -p $KIOSKDIR
 cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/kiosk.iso
 chown root:root kiosk.iso
+mkdir -p /mnt/kiosk_mount
 mount -o loop kiosk.iso /mnt/kiosk_mount
+mkdir -p /var/lib/kiosk/
 cp -arv /mnt/kiosk_mount/* /var/lib/kiosk/
 umount /mnt/kiosk_mount
