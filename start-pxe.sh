@@ -31,6 +31,7 @@ PORT=8090
 
 
 # Start the DHCP server and the TFTP server:
+systemctl stop systemd-resolved
 killall dnsmasq 2>/dev/null
 dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-3).50,$(echo $IP | cut -d. -f1-3).250,infinite --log-dhcp
 
