@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nitrogen:
-    image: image: weshinetech/uniapps-exam:2020.12.01
+    image: weshinetech/uniapps-exam:2020.12.01
     restart: always
     volumes:
       - ${PWD}/.data/oe2agent:/opt/oe2agent:rw
