@@ -50,9 +50,15 @@ sudo apt-get install -y dnsmasq webfs
 KIOSKDIR=`pwd`/kiosk
 mkdir -p $KIOSKDIR
 cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/kiosk.iso
-chown root:root kiosk.iso
-mkdir -p /mnt/kiosk_mount
-mount -o loop kiosk.iso /mnt/kiosk_mount
-mkdir -p /var/lib/kiosk/
-cp -arv /mnt/kiosk_mount/* /var/lib/kiosk/
-umount /mnt/kiosk_mount
+sudo chown root:root kiosk.iso
+sudo mkdir -p /mnt/kiosk_mount
+sudo mount -o loop kiosk.iso /mnt/kiosk_mount
+sudo mkdir -p /var/lib/kiosk/
+sudo cp -arv /mnt/kiosk_mount/* /var/lib/kiosk/
+sudo umount /mnt/kiosk_mount
+
+
+#
+# disable resolved as we use dnsmasq
+#
+sudo systemctl disable systemd-resolved
