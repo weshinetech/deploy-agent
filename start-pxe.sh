@@ -8,10 +8,7 @@ PXEDATA=/var/lib/kiosk/
 
 
 # Server IP address:
-echo "`hostname -I`" > file
-IP=`cat file|sed 's/ //'`
-rm file
-
+IP=`hostname -I | awk '{print $1}'`
 
 
 #disable firewall
