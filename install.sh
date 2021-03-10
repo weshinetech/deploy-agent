@@ -62,3 +62,20 @@ sudo umount /mnt/kiosk_mount
 # disable resolved as we use dnsmasq
 #
 sudo systemctl disable systemd-resolved
+
+
+
+#
+# update resolv.conf
+#
+sudo rm /etc/resolv.conf
+echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+
+
+
+
+#
+# update dnsmasq.conf
+#
+
+sudo sed -i "s/#no-hosts/no-hosts/g" /etc/dnsmasq.conf
