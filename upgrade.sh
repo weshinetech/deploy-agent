@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+#
+# stop docker containers
+#
+docker-compose down
+
+
 #
 # pull docker images
 #
