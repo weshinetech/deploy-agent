@@ -79,3 +79,10 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 #
 
 sudo sed -i "s/#no-hosts/no-hosts/g" /etc/dnsmasq.conf
+
+
+
+#
+# copy pxe script to if up d
+#
+sudo cp ./start_pxe /etc/network/if-up.d/start_pxe
