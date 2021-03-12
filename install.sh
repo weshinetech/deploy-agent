@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# init
+#
+BASEDIR=`pwd`
+
 
 #
 # update
@@ -47,7 +52,7 @@ sudo apt-get install -y dnsmasq webfs
 #
 # copy kiosk image
 #
-KIOSKDIR=`pwd`/kiosk
+KIOSKDIR=$BASEDIR/kiosk
 mkdir -p $KIOSKDIR
 cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/kiosk.iso
 sudo chown root:root kiosk.iso
@@ -56,6 +61,7 @@ sudo mount -o loop kiosk.iso /mnt/kiosk_mount
 sudo mkdir -p /var/lib/kiosk/
 sudo cp -arv /mnt/kiosk_mount/* /var/lib/kiosk/
 sudo umount /mnt/kiosk_mount
+cd $BASEDIR
 
 
 #
