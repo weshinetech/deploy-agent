@@ -82,4 +82,4 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 #
 # copy pxe script to if up d
 #
-sudo cp ./start_pxe /etc/network/if-up.d/start_pxe
+sudo cp ./rc.local /etc/rc.local
