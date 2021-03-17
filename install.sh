@@ -80,6 +80,6 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 
 
 #
-# copy pxe script to if up d
+# copy rc.local
 #
 sudo cp ./rc.local /etc/rc.local
