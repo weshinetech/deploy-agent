@@ -64,6 +64,7 @@ mkdir -p $KIOSKDIR
 # cd $BASEDIR
 cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/var.lib.kiosk.zip
 unzip var.lib.kiosk.zip
+sudo mkdir -p /var/lib/kiosk/
 sudo cp -arv var/lib/kiosk/* /var/lib/kiosk/
 cd $BASEDIR
 
