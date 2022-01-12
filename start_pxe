@@ -53,7 +53,7 @@ PORT=8090
 #
 sudo systemctl stop systemd-resolved
 sudo killall dnsmasq 2>/dev/null
-sudo dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).250.254,infinite --log-dhcp
+sudo dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).201.254,infinite --log-dhcp
 
 
 
