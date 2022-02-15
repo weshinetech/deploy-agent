@@ -54,14 +54,6 @@ sudo apt-get install -y dnsmasq webfs
 #
 KIOSKDIR=$BASEDIR/kiosk
 mkdir -p $KIOSKDIR
-# cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/kiosk.iso
-# sudo chown root:root kiosk.iso
-# sudo mkdir -p /mnt/kiosk_mount
-# sudo mount -o loop kiosk.iso /mnt/kiosk_mount
-# sudo mkdir -p /var/lib/kiosk/
-# sudo cp -arv /mnt/kiosk_mount/* /var/lib/kiosk/
-# sudo umount /mnt/kiosk_mount
-# cd $BASEDIR
 cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/var.lib.kiosk.zip
 unzip var.lib.kiosk.zip
 sudo mkdir -p /var/lib/kiosk/
@@ -85,6 +77,8 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 
 
 #
-# copy rc.local
+# copy system configs
 #
 sudo cp ./rc.local /etc/rc.local
+sudo cp ./configs/limits.conf /etc/security/limits.conf
+sudo cp ./configs/sysctl.conf /etc/sysctl.conf
