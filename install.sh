@@ -41,12 +41,25 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 
+#
+# disable resolved as we use dnsmasq
+#
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+
+
+# update resolv.conf
+#
+sudo rm /etc/resolv.conf
+echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
+sudo chattr +i /etc/resolv.conf
+
 
 #
 # netboot
 #
 sudo apt-get install -y dnsmasq webfs
-
+sudo cp /etc/dnsmasq.conf /etc/dnsmasq.conf.original
 
 
 #
@@ -60,21 +73,14 @@ sudo mkdir -p /var/lib/kiosk/
 sudo cp -arv var/lib/kiosk/* /var/lib/kiosk/
 cd $BASEDIR
 
-
 #
-# disable resolved as we use dnsmasq
+# get uefi boot file and grub config
 #
-sudo systemctl disable systemd-resolved
-
-
-
-#
-# update resolv.conf
-#
-sudo rm /etc/resolv.conf
-echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
-sudo chattr +i /etc/resolv.conf
-
+cd /var/lib/kiosk/boot; curl -O https://download.weshinetech.in/uefi/grubnetx64.efi
+mkdir grub 
+cd /var/lib/kiosk/boot/grub; curl -O https://download.weshinetech.in/uefi/grub.cfg
+chmod 777 /var/lib/kiosk/boot/grub/grub.cfg
+sudo cp /var/lib/kiosk/boot/grub/grub.cfg /var/lib/kiosk/boot/grub/grub.cfg.original
 
 
 #
