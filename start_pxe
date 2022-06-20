@@ -36,7 +36,6 @@ sudo ufw disable 2>/dev/null
 #
 # restore original files with placeholder string for IP and port
 #
-
 cp /etc/dnsmasq.conf.original /etc/dnsmasq.conf
 cp /var/lib/kiosk/boot/grub/grub.cfg.original /var/lib/kiosk/boot/grub/grub.cfg
 
@@ -48,13 +47,17 @@ sudo sed -i '/^dhcp-range=.*$/d' /etc/dnsmasq.conf
 a=`echo $IP|cut -d. -f1,2`;b=`echo ".0.0"`;sudo echo "dhcp-range=$a$b,proxy" >> /etc/dnsmasq.conf
 
 
-#Add UEFI Entry
+
+#
+# add UEFI Entry
+#
 echo "dhcp-match=set:efi32,option:client-arch,6" >> /etc/dnsmasq.conf
 echo "dhcp-boot=tag:efi32,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
 echo "dhcp-match=set:efibc,option:client-arch,7" >> /etc/dnsmasq.conf
 echo "dhcp-boot=tag:efibc,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
 echo "dhcp-match=set:efi64,option:client-arch,9" >> /etc/dnsmasq.conf
 echo "dhcp-boot=tag:efi64,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
+
 
 
 #
@@ -69,7 +72,7 @@ PORT=8090
 #
 sudo systemctl stop systemd-resolved
 sudo killall dnsmasq 2>/dev/null
-sudo dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).201.254,infinite --log-dhcp
+sudo dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).203.254,infinite --log-dhcp
 
 
 
