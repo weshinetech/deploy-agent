@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-bash /home/uniapps/deploy-agent/start_pxe &
+bash /root/deploy-agent/start_pxe &
 exit 0

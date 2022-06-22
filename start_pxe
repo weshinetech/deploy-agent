@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #
-# run services necessary for booting Porteus Kiosk over the network.
+# init
 #
-
+BASEDIR=/root/deploy-agent
 
 
 #
@@ -32,31 +32,30 @@ sudo echo "$IP    examserver" >> /etc/hosts
 sudo ufw disable 2>/dev/null
 
 
-
 #
 # restore original files with placeholder string for IP and port
 #
-cp /etc/dnsmasq.conf.original /etc/dnsmasq.conf
-cp /var/lib/kiosk/boot/grub/grub.cfg.original /var/lib/kiosk/boot/grub/grub.cfg
+sudo cp $BASEDIR/config/dnsmasq.conf /etc/dnsmasq.conf
+sudo cp $BASEDIR/grub/grub.cfg /var/lib/kiosk/boot/grub/grub.cfg
+
 
 
 #
-# add entry of dhcp-range in dnsmasq.conf
+# Legacy PXE
 #
-sudo sed -i '/^dhcp-range=.*$/d' /etc/dnsmasq.conf
-a=`echo $IP|cut -d. -f1,2`;b=`echo ".0.0"`;sudo echo "dhcp-range=$a$b,proxy" >> /etc/dnsmasq.conf
-
+sudo echo "dhcp-match=set:bios,option:client-arch,0"  >> /etc/dnsmasq.conf
+sudo echo "dhcp-boot=tag:bios,pxelinux.0, $IP, $IP"  >> /etc/dnsmasq.conf
 
 
 #
 # add UEFI Entry
 #
-echo "dhcp-match=set:efi32,option:client-arch,6" >> /etc/dnsmasq.conf
-echo "dhcp-boot=tag:efi32,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
-echo "dhcp-match=set:efibc,option:client-arch,7" >> /etc/dnsmasq.conf
-echo "dhcp-boot=tag:efibc,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
-echo "dhcp-match=set:efi64,option:client-arch,9" >> /etc/dnsmasq.conf
-echo "dhcp-boot=tag:efi64,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
+sudo echo "dhcp-match=set:efi32,option:client-arch,6" >> /etc/dnsmasq.conf
+sudo echo "dhcp-boot=tag:efi32,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
+sudo echo "dhcp-match=set:efibc,option:client-arch,7" >> /etc/dnsmasq.conf
+sudo echo "dhcp-boot=tag:efibc,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
+sudo echo "dhcp-match=set:efi64,option:client-arch,9" >> /etc/dnsmasq.conf
+sudo echo "dhcp-boot=tag:efi64,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
 
 
 
@@ -72,7 +71,11 @@ PORT=8090
 #
 sudo systemctl stop systemd-resolved
 sudo killall dnsmasq 2>/dev/null
-sudo dnsmasq --enable-tftp --tftp-root=$PXEDATA/boot --dhcp-boot=pxelinux.0,"$IP",$IP --dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).203.254,infinite --log-dhcp
+sudo dnsmasq \
+	--enable-tftp \
+	--tftp-root=$PXEDATA/boot \
+	--dhcp-range=$(echo $IP | cut -d. -f1-2).200.1,$(echo $IP | cut -d. -f1-2).203.254,infinite \
+	--log-dhcp
 
 
 
@@ -94,7 +97,7 @@ sudo echo 1 > /proc/sys/net/ipv4/ip_forward
 #
 sudo sed -i '/^append/d' /var/lib/kiosk/boot/pxelinux.cfg/default
 sudo echo "append initrd=initrd.xz,pxelinux.cfg/initrdpxe.xz quiet http_server=$IP:8090" >> /var/lib/kiosk/boot/pxelinux.cfg/default
-sudo sed -i "s#ServerIP#$IP:8090#g" /var/lib/kiosk/boot/grub/grub.cfg
+sudo sed -i "s#AGENT_SERVER_IP_PORT#$IP:8090#g" /var/lib/kiosk/boot/grub/grub.cfg
 
 #
 # done

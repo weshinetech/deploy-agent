@@ -62,7 +62,6 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 # netboot
 #
 sudo apt-get install -y dnsmasq webfs
-sudo cd /etc; curl -O https://download.weshinetech.in/uefi/dnsmasq.conf.original
 
 
 #
@@ -82,8 +81,9 @@ cd $BASEDIR
 # get uefi boot file and grub config
 #
 sudo mkdir -p /var/lib/kiosk/boot/grub
-cd /var/lib/kiosk/boot; curl -O https://download.weshinetech.in/uefi/grubnetx64.efi
-cd /var/lib/kiosk/boot/grub; curl -O https://download.weshinetech.in/uefi/grub.cfg.original
+cp $BASEDIR/grub/grubnetx64.efi /var/lib/kiosk/boot/
+cp $BASEDIR/grub/grub.cfg /var/lib/kiosk/boot/grub/
+
 chmod 777 /var/lib/kiosk/boot/grub/grub.cfg.original
 
 
@@ -91,9 +91,9 @@ chmod 777 /var/lib/kiosk/boot/grub/grub.cfg.original
 #
 # copy system configs
 #
-sudo cp ./rc.local /etc/rc.local
-sudo cp ./configs/limits.conf /etc/security/limits.conf
-sudo cp ./configs/sysctl.conf /etc/sysctl.conf
+sudo cp $BASEDIR/rc.local /etc/rc.local
+sudo cp $BASEDIR/configs/limits.conf /etc/security/limits.conf
+sudo cp $BASEDIR/configs/sysctl.conf /etc/sysctl.conf
 sudo sysctl -p
 
 
