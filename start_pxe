@@ -35,7 +35,7 @@ sudo ufw disable 2>/dev/null
 #
 # restore original files with placeholder string for IP and port
 #
-sudo cp $BASEDIR/config/dnsmasq.conf /etc/dnsmasq.conf
+sudo cp $BASEDIR/configs/dnsmasq.conf /etc/dnsmasq.conf
 sudo cp $BASEDIR/grub/grub.cfg /var/lib/kiosk/boot/grub/grub.cfg
 
 
