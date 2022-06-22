@@ -9,7 +9,7 @@ BASEDIR=/root/deploy-agent
 #
 # Path to folder where Kiosk ISO is unpacked/mounted:
 #
-PXEDATA=/var/lib/kiosk/
+PXEDATA=/var/lib/kiosk
 
 
 #
@@ -83,7 +83,7 @@ sudo dnsmasq \
 # Start the HTTP server:
 #
 sudo killall webfsd 2>/dev/null
-sudo webfsd -i 0.0.0.0 -p $PORT -r $PXEDATA -u nobody -g nogroup
+sudo webfsd -i 0.0.0.0 -p $PORT -r $PXEDATA/ -u nobody -g nogroup
 
 
 #
