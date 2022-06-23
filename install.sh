@@ -104,3 +104,11 @@ wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
 sudo apt-get -y update
 sudo apt-get install -y anydesk
+
+
+
+#
+# save docker images
+#
+cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-2020-12-01.tar
+cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-couchdb-2020-12-01.tar

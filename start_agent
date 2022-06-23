@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#
+# init
+#
+BASEDIR=/root/deploy-agent
+
+#
+# load images
+#
+cd $BASEDIR; docker load -i uniapps-exam-2020-12-01.tar
+cd $BASEDIR; docker load -i uniapps-exam-couchdb-2020-12-01.tar
+
+
+#
+# stop docker containers
+#
+cd $BASEDIR; docker-compose down
+
+
+#
+# start docker compose
+#
+cd $BASEDIR; docker-compose up -d
