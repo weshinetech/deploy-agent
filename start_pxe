@@ -62,7 +62,7 @@ sudo echo "dhcp-boot=tag:efi64,bootx64.efi, $IP, $IP" >> /etc/dnsmasq.conf
 #
 # Port on which the HTTP daemon is listening:
 #
-PORT=8090
+PORT=443
 
 
 
@@ -96,8 +96,8 @@ sudo echo 1 > /proc/sys/net/ipv4/ip_forward
 # add entry in /var/lib/kiosk/boot/pxelinux.cfg/default and grub.cfg
 #
 sudo sed -i '/^append/d' /var/lib/kiosk/boot/pxelinux.cfg/default
-sudo echo "append initrd=initrd.xz,pxelinux.cfg/initrdpxe.xz quiet http_server=$IP:8090" >> /var/lib/kiosk/boot/pxelinux.cfg/default
-sudo sed -i "s#AGENT_SERVER_IP_PORT#$IP:8090#g" /var/lib/kiosk/boot/grub/grub.cfg
+sudo echo "append initrd=initrd.xz,pxelinux.cfg/initrdpxe.xz quiet http_server=$IP:$PORT" >> /var/lib/kiosk/boot/pxelinux.cfg/default
+sudo sed -i "s#AGENT_SERVER_IP_PORT#$IP:$PORT#g" /var/lib/kiosk/boot/grub/grub.cfg
 
 #
 # done

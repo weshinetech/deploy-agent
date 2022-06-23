@@ -81,10 +81,9 @@ cd $BASEDIR
 # get uefi boot file and grub config
 #
 sudo mkdir -p /var/lib/kiosk/boot/grub
-cp $BASEDIR/grub/grubnetx64.efi /var/lib/kiosk/boot/
-cp $BASEDIR/grub/grub.cfg /var/lib/kiosk/boot/grub/
-
-chmod 777 /var/lib/kiosk/boot/grub/grub.cfg.original
+sudo cp $BASEDIR/grub/bootx64.efi /var/lib/kiosk/boot/
+sudo cp $BASEDIR/grub/grub.cfg /var/lib/kiosk/boot/grub/
+sudo chmod 777 /var/lib/kiosk/boot/grub/grub.cfg
 
 
 
