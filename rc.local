@@ -1,5 +1,4 @@
 #!/bin/sh -e
 
 bash /root/deploy-agent/start_pxe &
-bash /root/deploy-agent/start_agent &
 exit 0
