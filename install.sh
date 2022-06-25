@@ -93,6 +93,8 @@ sudo chmod 777 /var/lib/kiosk/boot/grub/grub.cfg
 sudo cp $BASEDIR/rc.local /etc/rc.local
 sudo cp $BASEDIR/configs/limits.conf /etc/security/limits.conf
 sudo cp $BASEDIR/configs/sysctl.conf /etc/sysctl.conf
+sudo cp $BASEDIR/configs/system.conf /etc/systemd/system.conf
+sudo cp $BASEDIR/configs/user.conf /etc/systemd/user.conf
 sudo sysctl -p
 
 
