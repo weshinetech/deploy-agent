@@ -113,5 +113,5 @@ sudo dpkg -i $BASEDIR/libpangox-1.0-0_0.0.2-5.1_amd64.deb
 #
 # save docker images
 #
-cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-2020-12-01.tar
-cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-couchdb-2020-12-01.tar
+cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-sl-2020-10-02.tar.gz
+cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-couchdb-2020-12-01.tar.gz
