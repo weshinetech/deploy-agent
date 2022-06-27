@@ -111,6 +111,12 @@ sudo dpkg -i $BASEDIR/libpangox-1.0-0_0.0.2-5.1_amd64.deb
 
 
 #
+# disable wayland - required for anydesk to run properly
+#
+sudo sed -i 's/#WaylandEnable=.*$/WaylandEnable=false/g' /etc/gdm3/custom.conf
+
+
+#
 # save docker images
 #
 cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-sl-2020-10-02.tar.gz
