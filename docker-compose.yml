@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nitrogen:
-    image: weshinetech/uniapps-exam-sl:2020.10.02
+    image: public.ecr.aws/m6p9r3p6/uniapps-exam-sl:cbt
     restart: always
     volumes:
       - ${PWD}/.data/oe2agent:/opt/oe2agent:rw
@@ -14,7 +14,7 @@ services:
 
 
   couchdb:
-    image: weshinetech/uniapps-exam-couchdb:2020.12.01
+    image: public.ecr.aws/m6p9r3p6/uniapps-exam-couchdb:2020.12.01
     restart: always
     volumes:
       - ${PWD}/.data/couchdb/data:/opt/couchdb/data:rw

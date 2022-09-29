@@ -64,6 +64,7 @@ echo nameserver 8.8.8.8 | sudo tee /etc/resolv.conf
 sudo apt-get install -y dnsmasq webfs
 
 
+
 #
 # copy kiosk image
 #
@@ -110,14 +111,16 @@ cd $BASEDIR; wget http://ftp.us.debian.org/debian/pool/main/p/pangox-compat/libp
 sudo dpkg -i $BASEDIR/libpangox-1.0-0_0.0.2-5.1_amd64.deb
 
 
+
 #
 # disable wayland - required for anydesk to run properly
 #
 sudo sed -i 's/#WaylandEnable=.*$/WaylandEnable=false/g' /etc/gdm3/custom.conf
 
 
+
 #
 # save docker images
 #
-cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-sl-2020-10-02.tar.gz
+cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-sl-cbt.tar.gz
 cd $BASEDIR; curl -O https://download.weshinetech.in/docker/uniapps-exam-couchdb-2020-12-01.tar.gz

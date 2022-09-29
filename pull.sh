@@ -4,5 +4,5 @@
 #
 # pull docker images
 #
-docker pull weshinetech/uniapps-exam-sl:2020.10.02
-docker pull weshinetech/uniapps-exam-couchdb:2020.12.01
+docker pull public.ecr.aws/m6p9r3p6/uniapps-exam-sl:cbt
+docker pull public.ecr.aws/m6p9r3p6/uniapps-exam-couchdb:2020.12.01
