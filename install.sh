@@ -70,7 +70,7 @@ sudo apt-get install -y dnsmasq webfs
 #
 KIOSKDIR=$BASEDIR/kiosk
 mkdir -p $KIOSKDIR
-cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/var.lib.kiosk.zip
+cd $KIOSKDIR; curl -O https://download.weshinetech.in/kiosk/var.lib.kiosk.540.zip
 unzip var.lib.kiosk.zip
 sudo mkdir -p /var/lib/kiosk/
 sudo cp -arv var/lib/kiosk/* /var/lib/kiosk/
